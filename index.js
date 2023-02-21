@@ -46,23 +46,27 @@ async function start() {
 
    
     let hiddenNumber = await ask(`\nPlease choose a number greater than ${lowNum} but less than ${highNum} `);
+        // new code
+  
     console.log(`The number you picked was: ${hiddenNumber} `)
     
-    console.log(`\nYou set ${hiddenNumber} as the highest value.`);
 
     timeToPlay()
 
     async function timeToPlay(){
-          let cpuPlayerTry = await ask(`I will guess ${calculation} is that correct? r or w` )
+          let cpuPlayerTry = await ask(`I will guess ${calculation} is that correct? \n yes or no` )
 
-          if (cpuPlayerTry === "w" && calculation !== hiddenNumber ){
-              console.log("Try again cpu your cores are fried");
-          
-            calculation = Math.floor(Math.random() * highNum)
+          if (cpuPlayerTry == "no" && calculation !== hiddenNumber ){
+              console.log("Try again cpu your cores are fried"); 
+             calculation = Math.floor(Math.random() * highNum)
             
-            timeToPlay()
-                    
-          }  else if (cpuPlayerTry === "r" && hiddenNumber === hiddenNumber){
+            timeToPlay() 
+              let askHelp = await ask(`Is the number higher or lower than ${hiddenNumber}? `)
+
+          } 
+          
+          
+          else if (hiddenNumber == hiddenNumber && cpuPlayerTry == "yes"){
             console.log("Chip off the good old fab! You have been binned well")
 
           } 
