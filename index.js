@@ -23,15 +23,16 @@ async function start() {
   console.log(
     "Let's play a game where you (human) make up a number and I (computer) try to guess it."
   );
+  console.log("Must be a number between 1 and 100");
   console.log("-------------------------");
 
   //////////////////
   // The function that starts the whole game
   // async function start() {
   // Intro game text
-  /*   console.log("Let's play a game where you (human) make up a number and I (computer) try to guess it.")
-  let secretNumber = await ask("What is your secret number?\nI won't peek, I promise...\n");
-  console.log('You entered: ' + secretNumber); */
+  /* console.log("Let's play a game where you (human) make up a number and I (computer) try to guess it.")
+let secretNumber = await ask("What is your secret number?\nI won't peek, I promise...\n");
+console.log('You entered: ' + secretNumber); */
 
   /////////////////
   async function pickHighNum() {
@@ -40,45 +41,33 @@ async function start() {
     // Set Highest num
     let highNum = 100;
     // variable calculation generating number base on floor method while passing in highName variable
-    let calculation = Math.floor(Math.random() * highNum);
-    // giving a guessing range
-
-    // new code
-
-    // console log to see the variable hiddenNumber that was picked
+    //let calculation = Math.floor(Math.random() * highNum);
+    let calculation = Math.floor(Math.random() * highNum + lowNum);
 
     // calling a function written below works due to JS hoisting abilities
+    guessInt();
 
-    let result;
-    do {
-      result = guessInt();
-    } while (!result); //
+    //
 
-    // using async and await response80o
+    // using async and await response
     async function guessInt() {
       let cpuPlayerTry = await ask(
-        // cpu guessing based on hiddenNumber
+        // cpu guessing based on number human thought of
         `I will guess ${calculation} is that correct? \n yes or no \n`
       );
 
-      // logic used to determine if guess was correct
+      // if response is "no" from the question above run console.log...
       if (cpuPlayerTry == "no") {
         console.log("Try again cpu your cores are fried");
-
-        let computerIntGuessing = calculation;
-
-        let cpuHint = await ask(
-          `Is the number higher or lower than ${computerIntGuessing}? `
-        );
-
-        // giving the cpu a hint
+        // calling the function to a new number can be picked
+        pickHighNum();
       } else if (cpuPlayerTry == "yes") {
-        console.log("Chip off the good old fab! You have been binned well");
+        console.log(
+          "Chip off the good old fab! You have been binned well, gameover!"
+        );
       }
     }
   }
 
   pickHighNum();
 }
-//Stops the star function from running, "exits"
-//  process.exit();
